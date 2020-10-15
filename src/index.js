@@ -8,10 +8,6 @@ const resolvers = {
 		feed: () => async (parent, args, context) => {
 			return context.prisma.link.findMany();
 		},
-		link: (parent, { id }, context) => {
-			const link = context.prisma.link.find((link) => link.id === id);
-			return link;
-		},
 	},
 	Mutation: {
 		post: (parent, args, context) => {
@@ -22,24 +18,6 @@ const resolvers = {
 				},
 			});
 			return newLink;
-		},
-		updateLink: (parent, args, context) => {
-			const links = context.prisma.link.findMany();
-			links.forEach((link) => {
-				if (link.id === args.id) {
-					link.id = args.id;
-					link.url = args.url;
-					link.description = args.description;
-				}
-				return link;
-			});
-		},
-		deleteLink: (parent, { id }, context) => {
-			const links = context.prisma.link.findMany();
-			const index = links.findIndex((link) => link.id === id);
-			const link = links[index];
-			links.splice(index, 1);
-			return link;
 		},
 	},
 };
