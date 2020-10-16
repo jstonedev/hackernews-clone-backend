@@ -23,7 +23,7 @@ type AuthPayload {
 
 type User {
 	id: ID!
-	name: Stirng!
+	name: String!
 	email: String!
 	links: [Link!]!
 }
